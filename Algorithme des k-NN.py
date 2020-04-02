@@ -69,11 +69,14 @@ class Knn:
             distance= self.dist(sample)
             d_voisins.append((distance, index))
         d_voisins = sorted(d_voisins)
+        loin= d_voisins[:self.k]
+        loin= loin[-1]
+        got_it=loin[0]
         indice_voisins=[index for distance,index in d_voisins[:self.k]]
         for i in indice_voisins:
             a.append(self.data[i]+ [self.genre[i]]+[self.stat[i]])
 
-        return a
+        return [a,got_it]
 
 
 
@@ -135,7 +138,10 @@ def Graph():
         y.append(L[i][1])
     normal=plt.scatter(x, y, s=10)
 
-    a= Echantillon.NearestNeighbors()
+    base= Echantillon.NearestNeighbors()
+    a=base[0]
+    PlusLoin=base[1]
+
     del a[0]
 
 ###Points sur la figure
@@ -172,8 +178,9 @@ def Graph():
 
     attributs=str(Pr[2])+", "+str(Pr[3])
 ##Cercle
-    LeCercle= PlusEloigne(a,population)
-    circle1 = plt.Circle((population), LeCercle[4], color='red',fill=False, linestyle='--')
+
+
+    circle1 = plt.Circle((population), PlusLoin, color='red',fill=False, linestyle='--')
     fig = plt.gcf()
     ax = fig.gca()
     ax.add_artist(circle1)
@@ -201,48 +208,7 @@ def Graph():
 
 
 
-"""
-Cette partie du code sert a trouver le point le plus distant du point choisi afin de trouver le rayon du cercle. On peut faire plus simple avec la classe .
-"""
 
-def Cercle(a,pop):
-    x1= a[0]
-    y1= a[1]
-    distance=0
-    X= pop[0]
-    Y= pop[1]
-    distance=(X-x1)**2+(Y-y1)**2
-    distance=np.sqrt(distance)
-    a.append(distance)
-    return a
-
-def PlusEloigne(a,pop):
-    d_voisins=[]
-    L=[]
-    m=0
-    z=0
-    krk=0
-    for index, sample in enumerate(a):
-        distance= Cercle(sample,pop)
-        d_voisins.append((distance, index))
-    d_voisins = sorted(d_voisins)
-
-    indice_voisins=[index for distance,index in d_voisins[:]]
-
-    for i in indice_voisins:
-        L.append(a[i])
-    for j in range(len(L)):
-        r=L[j][4]
-        if int(r)>m:
-            m=r
-
-    for item in range(len(L)):
-        for sousitem in range(len(L[item])):
-            kk=L[item][sousitem]
-            if m ==kk:
-                krk=L[item]
-
-    return krk
 
 
 
