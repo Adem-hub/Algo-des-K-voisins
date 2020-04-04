@@ -49,16 +49,16 @@ class Knn:
 
     def sexe(self):
         self.genre=[]
-        for item in self.data:
-            p=random.choice(["homme","femme"])
-            self.genre.append(p)
+        for item in range(len(self.data)):
+            item=random.choice(["homme","femme"])
+            self.genre.append(item)
         return self.genre
 
     def etat(self):
         self.stat=[]
-        for item in self.data:
-            ll=random.choice(["infecté(e)","non infecté(e)"])
-            self.stat.append(ll)
+        for item in range(len(self.data)):
+            item=random.choice(["infecté(e)","non infecté(e)"])
+            self.stat.append(item)
         return self.stat
 
     def NearestNeighbors(self):
