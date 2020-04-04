@@ -6,9 +6,9 @@ from matplotlib.widgets import Slider, Button
 
 
 
-"""
-Lancez la fonction Graph() pour creer un graphique aléatoire
-"""
+
+
+
 
 
 def sample():
@@ -201,8 +201,8 @@ def Graph():
 
 
 
-
-
+if __name__=="__main__":
+    Graph()
 
 
 
