@@ -1,14 +1,6 @@
 import numpy as np
 import random
 import matplotlib.pyplot as plt
-from matplotlib.widgets import Slider, Button
-
-
-
-
-
-
-
 
 
 def sample():
@@ -18,10 +10,13 @@ def sample():
         new[i][1]=random.randint(0,10000)
         while new[i][0]<new[i][1]:
              new[i][1]=random.randint(0,10000)
-
     return new
 
-
+def pt():
+    a=random.randint(0,20000)
+    b=random.randint(0,10000)
+    L=[a,b]
+    return L
 
 
 
@@ -31,21 +26,11 @@ class Knn:
     def __init__(self):
 
         self.data= sample()
-        self.k=random.randrange(4,16,2)
+        self.k=random.randrange(5,16,2)
         rd=random.randint(0,len(self.data)-1)
-        self.etude = self.data[rd]
+        self.etude = pt()
         self.genre= self.sexe()
         self.stat= self.etat()
-
-
-
-    def donnees(self):
-        jean=self.data
-        return jean
-
-    def population(self):
-        pop=self.etude
-        return pop
 
     def sexe(self):
         self.genre=[]
@@ -88,11 +73,6 @@ class Knn:
         return dist
 
 
-
-
-
-
-
 def occurence(population,a):
     L=[]
     Lbis=[]
@@ -121,28 +101,22 @@ def occurence(population,a):
     return [population,a,b,c,d]
 
 
-
-
-
 def Graph():
     x=[]
     y=[]
     Echantillon= Knn()
-    population= Echantillon.population()
+    population= Echantillon.etude
     pop1=population[0]
     pop2=population[1]
 
-    L= Echantillon.donnees()
+    L= Echantillon.data
     for i in range(len(L)):
         x.append(L[i][0])
         y.append(L[i][1])
     normal=plt.scatter(x, y, s=10)
-
     base= Echantillon.NearestNeighbors()
     a=base[0]
     PlusLoin=base[1]
-
-    del a[0]
 
 ###Points sur la figure
     #Voisins
@@ -160,7 +134,7 @@ def Graph():
                 plt.scatter(xx,yy,s=30, edgecolors = 'black',color="green")
 
 
-    mp=plt.scatter(pop1,pop2,s=10,color='white')#J'efface le point bleu situé à l'endroit de mon point etudié.
+
     mp=plt.scatter(pop1,pop2,s=50,color='black',marker = '+', edgecolors = 'black')
 
 
@@ -197,12 +171,9 @@ def Graph():
 
     plt.show()
 
-
-
-
-
 if __name__=="__main__":
     Graph()
+
 
 
 
